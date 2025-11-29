@@ -21,8 +21,24 @@ special_dragon_jude_mode: 'weight'
 # you can create a new file named '<NAME>.yml' in plugins/EnderDragon/setting,
 # and then add - '<NAME>:<WEIGHT>' here
 dragon_setting_file:
-  - 'default:5'
-  - 'special:5'
+  #- 'default:5'
+  #- 'special:5'
+  - 'strong:100'
+
+first_dragon:
+  # Enabled: 'DEFAULT','VANILLA','COMMANDS'
+  # DEFAULT: Plugin will handle the first dragon as usual.
+  # VANILLA: Plugin will ignore the first dragon (keep vanilla behavior).
+  # COMMANDS: Plugin will ignore the first dragon and execute commands below.
+  # 
+  # How it works: Plugin automatically detects if a dragon has been previously killed
+  # in this world using Minecraft's DragonBattle API. When you reset the End world,
+  # the plugin will automatically detect the new first dragon without manual configuration.
+  mode: 'COMMANDS'
+  # Available placeholders: %world%
+  commands:
+    - 'execute in %world% run minecraft:kill @e[type=minecraft:ender_dragon]'
+    - 'execute in %world% run minecraft:fill 0 0 0 0 128 0 air replace dragon_egg'
 
 auto_respawn:
   # You can add more entries without duplicate name according to the format.
@@ -56,6 +72,9 @@ respawn_cd:
 crystal_invulnerable: false
 #if set this to true, end_crystal can still be crafted or placed,but end_crystal that placed by player cannot respawn the ender_dragon
 resist_player_respawn: false
+#if set this to true, dragons spawned by player-placed crystals will be vanilla (not managed by plugin)
+#only plugin-initiated respawns (auto_respawn, respawn_cd, /ed respawn) will spawn custom dragons
+player_crystal_vanilla_dragon: false
 #if set this to true, player cannot gather dragon_breath with glass_bottle
 resist_dragon_breath_gather: false
 #The gui that will be shown when using "/ed drop gui"

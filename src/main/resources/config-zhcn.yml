@@ -24,6 +24,20 @@ dragon_setting_file:
   - 'default:5'
   - 'special:5'
 
+first_dragon:
+  # 可选: 'DEFAULT','VANILLA','COMMANDS'
+  # DEFAULT: 插件会正常处理第一条末影龙
+  # VANILLA: 插件会忽略第一条末影龙（不替换，保持原版行为）
+  # COMMANDS: 插件会忽略第一条末影龙，并执行下方的命令
+  # 
+  # 工作原理: 插件使用Minecraft的DragonBattle API自动检测该世界中的龙是否被击杀过。
+  # 当你重置末地世界后，插件会自动检测到新的第一条龙，无需手动配置。
+  mode: 'COMMANDS'
+  # 可用占位符: %world%（世界名）
+  commands:
+    - 'execute in %world% run minecraft:kill @e[type=minecraft:ender_dragon]'
+    - 'execute in %world% run minecraft:fill 0 128 0 0 128 0 air replace dragon_egg'
+
 #自动复活末影龙
 auto_respawn:
   # 你可以按格式添加更多条目，但是名称不能重复
@@ -57,6 +71,9 @@ respawn_cd:
 crystal_invulnerable: false
 #如果设置为true，玩家手动放置末地水晶将无法复活末影龙，但不影响末地水晶的合成、放置
 resist_player_respawn: false
+#如果设置为true，玩家放置水晶召唤的末影龙将是原版龙（不被插件接管）
+#只有插件发起的重生（auto_respawn、respawn_cd、/ed respawn）才会生成特殊龙
+player_crystal_vanilla_dragon: false
 #如果设置为true，玩家无法用玻璃瓶收集龙息
 resist_dragon_breath_gather: false
 #指令/ed drop gui 打开的默认主页面

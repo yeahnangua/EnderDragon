@@ -30,11 +30,14 @@ public class Config {
     public static boolean crystal_invulnerable;
     public static boolean respawn_cd_enable;
     public static boolean resist_player_respawn;
+    public static boolean player_crystal_vanilla_dragon;
     public static boolean resist_dragon_breath_gather;
     public static boolean hook_plugins_MythicLib;
     public static boolean expansion_groovy;
     public static String main_gui;
     public static String item_format_reward;
+    public static String first_dragon_mode;
+    public static List<String> first_dragon_commands;
     public static List<String> dragon_setting_file;
     public static List<String> blacklist_worlds;
     public static List<String> blacklist_spawn_reason;
