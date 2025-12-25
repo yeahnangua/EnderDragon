@@ -226,6 +226,8 @@ special_loot:
     type: command
     # %attacker% -> all participants in dragon slaying
     target: "%attacker%"
+    # delay in ticks before executing commands (20 ticks = 1 second)
+    delay: 0
     # %player% -> target, %damage% -> this player's damage to EnderDragon
     data:
       - 'give %player% stone 1'
@@ -235,6 +237,7 @@ special_loot:
     type: command
     # %attacker_top_<rank>% -> the player with exactly this rank
     target: "%attacker_top_1%"
+    delay: 0
     data:
       - 'ed action %player% tell: You are the one who causes the highest damage!'
       - 'ed action %player% tell: Your damage: %damage%'

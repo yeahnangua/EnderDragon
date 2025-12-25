@@ -282,7 +282,8 @@ public class DragonManager {
                 if("command".equals(type)){
                     List<String> commands = loot.getStringList("data");
                     boolean executeOffline = loot.getBoolean("execute-if-offline");
-                    specialLoot = (player, damage) -> handleCommandLoot(commands,player,damage,executeOffline);
+                    int delay = loot.getInt("delay", 0);
+                    specialLoot = (player, damage) -> handleCommandLoot(commands,player,damage,executeOffline,delay);
                 }
                 else if("exp".equals(type)){
                     int amount = loot.getInt("data"+f.options().pathSeparator()+"amount");
@@ -326,17 +327,21 @@ public class DragonManager {
         dragon_names.add(myDragon.unique_name);
         sum += edge;
     }
-    private static void handleCommandLoot(List<String> list, String name, String damage, boolean executeOffline){
+    private static void handleCommandLoot(List<String> list, String name, String damage, boolean executeOffline, int delay){
         if(list == null) return;
 
         Player player = Bukkit.getPlayer(name);
         if (player == null && !executeOffline)
             return;
 
-        for (String cmd : list) {
-            if(cmd.equals("")) continue;
-            plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(),cmd.replaceAll("%player%",name).replaceAll("%damage%",damage));
-        }
+        Runnable task = () -> {
+            for (String cmd : list) {
+                if(cmd.isEmpty()) continue;
+                plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(),cmd.replaceAll("%player%",name).replaceAll("%damage%",damage));
+            }
+        };
+        if(delay > 0) Bukkit.getScheduler().runTaskLater(plugin, task, delay);
+        else task.run();
     }
     public static void disable(){
         dragons = null;
