@@ -39,8 +39,8 @@ public class DragonManager {
     /**
      * 底层是unmodifiableList
      */
-    @Getter
     static List<MyDragon> dragons;
+    public static List<MyDragon> getDragons(){ return dragons; }
     static final Map<String, MyDragon> mp = new HashMap<>();
     public static List<String> dragon_names = new ArrayList<>();
     public static final Map<UUID,DragonInfo> existing_dragon = new ConcurrentHashMap<>();
@@ -57,8 +57,8 @@ public class DragonManager {
     private static Method getY;
     private static Method getZ;
     private static final Pattern pattern_attacker_top = Pattern.compile("%attacker_top_(\\d+)%");
-    @Getter
     private static final EntityType ENDER_CRYSTAL = Version.NBT_UPDATE?EntityType.END_CRYSTAL:EntityType.valueOf("ENDER_CRYSTAL");
+    public static EntityType getENDER_CRYSTAL(){ return ENDER_CRYSTAL; }
 
     public static void reload(){
         final List<MyDragon> dragons = new ArrayList<>();

@@ -1,6 +1,5 @@
 package pers.xanadu.enderdragon.util;
 
-import lombok.Getter;
 import org.bukkit.Bukkit;
 import pers.xanadu.enderdragon.EnderDragon;
 import pers.xanadu.enderdragon.config.Lang;
@@ -21,8 +20,8 @@ public class Version {
     public static final String reward = "2.1.0";
     public static int mcMainVersion;
     public static int mcPatchVersion;
-    @Getter
     public static boolean NBT_UPDATE;
+    public static boolean isNBT_UPDATE(){ return NBT_UPDATE; }
     private static String version = "no version found";
     private static boolean isMohist = false;
     public static void init(){
